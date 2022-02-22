@@ -1,0 +1,116 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.css" type="text/css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis-network.min.js"> </script>
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 700px;
+            height: 700px;
+            background-color: black;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"font": {"color": "white"}, "id": "root", "label": "root", "shape": "dot", "size": 10}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Assistant Professor", "label": "Assistant Professor", "shape": "dot", "size": 24, "title": "24"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Owner", "label": "Owner", "shape": "dot", "size": 19, "title": "19"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Research Assistant Professor", "label": "Research Assistant Professor", "shape": "dot", "size": 14, "title": "14"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Associate Professor", "label": "Associate Professor", "shape": "dot", "size": 13, "title": "13"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "President", "label": "President", "shape": "dot", "size": 12, "title": "12"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Professor", "label": "Professor", "shape": "dot", "size": 9, "title": "9"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Vice President", "label": "Vice President", "shape": "dot", "size": 8, "title": "8"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Founder", "label": "Founder", "shape": "dot", "size": 7, "title": "7"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Research Scientist", "label": "Research Scientist", "shape": "dot", "size": 6, "title": "6"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Data Scientist", "label": "Data Scientist", "shape": "dot", "size": 6, "title": "6"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "CEO", "label": "CEO", "shape": "dot", "size": 6, "title": "6"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Director", "label": "Director", "shape": "dot", "size": 5, "title": "5"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Attorney", "label": "Attorney", "shape": "dot", "size": 5, "title": "5"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Research Associate Professor", "label": "Research Associate Professor", "shape": "dot", "size": 5, "title": "5"}]);
+        edges = new vis.DataSet([{"color": "grey", "from": "root", "to": "Assistant Professor", "weight": 1}, {"color": "grey", "from": "root", "to": "Owner", "weight": 1}, {"color": "grey", "from": "root", "to": "Research Assistant Professor", "weight": 1}, {"color": "grey", "from": "root", "to": "Associate Professor", "weight": 1}, {"color": "grey", "from": "root", "to": "President", "weight": 1}, {"color": "grey", "from": "root", "to": "Professor", "weight": 1}, {"color": "grey", "from": "root", "to": "Vice President", "weight": 1}, {"color": "grey", "from": "root", "to": "Founder", "weight": 1}, {"color": "grey", "from": "root", "to": "Research Scientist", "weight": 1}, {"color": "grey", "from": "root", "to": "Data Scientist", "weight": 1}, {"color": "grey", "from": "root", "to": "CEO", "weight": 1}, {"color": "grey", "from": "root", "to": "Director", "weight": 1}, {"color": "grey", "from": "root", "to": "Attorney", "weight": 1}, {"color": "grey", "from": "root", "to": "Research Associate Professor", "weight": 1}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": false,
+            "type": "continuous"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "hierarchicalRepulsion": {
+            "centralGravity": 0.0,
+            "damping": 0.09,
+            "nodeDistance": 120,
+            "springConstant": 0.01,
+            "springLength": 100
+        },
+        "solver": "hierarchicalRepulsion",
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+        
+        
+
+        
+
+        network = new vis.Network(container, data, options);
+	 
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>

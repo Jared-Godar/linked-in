@@ -1,0 +1,116 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.css" type="text/css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis-network.min.js"> </script>
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 700px;
+            height: 700px;
+            background-color: black;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"font": {"color": "white"}, "id": "root", "label": "root", "shape": "dot", "size": 10}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Vanderbilt University Medical Center", "label": "Vanderbilt University Medical Center", "shape": "dot", "size": 122, "title": "\u003cb\u003eVanderbilt University Medical Center\u003c/b\u003e \u2013 61\u003cul\u003e\u003cli\u003eLaboratory Manager\u003c/li\u003e\u003cli\u003eResearch Assistant Professor\u003c/li\u003e\u003cli\u003eAssociate Vice President, Vanderbilt Health Services\u003c/li\u003e\u003cli\u003eProfessor of Radiology, Biomedical Engineering, Ophthalmology\u003c/li\u003e\u003cli\u003eClinical Trials Associate II\u003c/li\u003e\u003cli\u003eInstructor\u003c/li\u003e\u003cli\u003eCytogenetic Technologist\u003c/li\u003e\u003cli\u003eProfessor of Pharmacology\u003c/li\u003e\u003cli\u003eResearch Fellow\u003c/li\u003e\u003cli\u003eLead Sponsored Program Specialist\u003c/li\u003e\u003cli\u003eProfessor\u003c/li\u003e\u003cli\u003eAssociate Professor\u003c/li\u003e\u003cli\u003eBudget/Accounting Analyst\u003c/li\u003e\u003cli\u003eHealth Information Systems Project Manager III\u003c/li\u003e\u003cli\u003ePreliminary Medical Intern\u003c/li\u003e\u003cli\u003ePostdoctoral Research Fellow\u003c/li\u003e\u003cli\u003eDirector, Vanderbilt Vaccine Center\u003c/li\u003e\u003cli\u003eResident Physician\u003c/li\u003e\u003cli\u003eDirector of Operations\u003c/li\u003e\u003cli\u003eTeam Lead\u003c/li\u003e\u003cli\u003eAssistant Professor, Rheumatology and Immunology, Department of Medicine\u003c/li\u003e\u003cli\u003eBusiness Support Manager\u003c/li\u003e\u003cli\u003eGrants Manager\u003c/li\u003e\u003cli\u003eClinical Fellow - Epilepsy\u003c/li\u003e\u003cli\u003eResearch Assistant II\u003c/li\u003e\u003cli\u003eComputer Systems Administrator\u003c/li\u003e\u003cli\u003eAssociate professor\u003c/li\u003e\u003cli\u003eDirector, Population Health and Patient Engagement Portfolio\u003c/li\u003e\u003cli\u003eAssociate Director, Vanderbilt Vaccine Center\u003c/li\u003e\u003cli\u003eGraduate Student Researcher\u003c/li\u003e\u003cli\u003eClinical Research Coordinator\u003c/li\u003e\u003cli\u003eVice Chair Clinical Affairs, Executive Medical Director, Vanderbilt Dermatology\u003c/li\u003e\u003cli\u003eAssistant Professor of Neurology\u003c/li\u003e\u003cli\u003eSenior Communications Specialist\u003c/li\u003e\u003cli\u003eResearch Assistant Professor of Radiology\u003c/li\u003e\u003cli\u003eRN\u003c/li\u003e\u003cli\u003ePostdoctoral Researcher\u003c/li\u003e\u003cli\u003eAileen M. Lange and Annie Mary Lyle Chair in Cardiovascular Research and Professor, Pharmacology\u003c/li\u003e\u003cli\u003eGraduate Student\u003c/li\u003e\u003cli\u003eAssistant Professor Of Medicine\u003c/li\u003e\u003cli\u003eSenior Research Specialist\u003c/li\u003e\u003cli\u003eDirector, Clinical Informatics Core\u003c/li\u003e\u003cli\u003eCardiothoracic Anesthesiologist\u003c/li\u003e\u003cli\u003ePh.D. Candidate Researcher\u003c/li\u003e\u003cli\u003eResearch Associate Professor\u003c/li\u003e\u003cli\u003eAssistant Professor\u003c/li\u003e\u003cli\u003eClinical/Translational Research Coordinator II \u003c/li\u003e\u003cli\u003eResearch Instructor in Medicine\u003c/li\u003e\u003cli\u003eAssistant Professor of Pediatrics\u003c/li\u003e\u003c/ul\u003e"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Vanderbilt University", "label": "Vanderbilt University", "shape": "dot", "size": 104, "title": "\u003cb\u003eVanderbilt University\u003c/b\u003e \u2013 52\u003cul\u003e\u003cli\u003eAssistant Professor of Cell and Developmental Biology\u003c/li\u003e\u003cli\u003eSenior Licensing Officer\u003c/li\u003e\u003cli\u003eAdministrative Officer - Basic Science Research Administration, POD2\u003c/li\u003e\u003cli\u003eResearch Assistant Professor\u003c/li\u003e\u003cli\u003eResearch Associate Professor of Biochemistry \u0026 Assistant Director, Center for Structural Biology\u003c/li\u003e\u003cli\u003eProfessor\u003c/li\u003e\u003cli\u003eProgram Coordinator\u003c/li\u003e\u003cli\u003eAssociate Professor\u003c/li\u003e\u003cli\u003eAdministrative Assistant III\u003c/li\u003e\u003cli\u003eChancellor\u0027s Chair in Medicine, Professor of Biochemistry and Chemistry\u003c/li\u003e\u003cli\u003eAssociate Vice Chancellor for University Relations\u003c/li\u003e\u003cli\u003eAssistant Professor, Medical Education and Administration\u003c/li\u003e\u003cli\u003eInstructor / Laboratory Manager\u003c/li\u003e\u003cli\u003eAdministrative Assistant II\u003c/li\u003e\u003cli\u003eProfessor of Cancer Biology\u003c/li\u003e\u003cli\u003eDirector, Quantitative Chemical Biology\u003c/li\u003e\u003cli\u003eChair, Electrical and Computer Engineering\u003c/li\u003e\u003cli\u003eDrug Discovery Vanderbilt Institute of Imaging Science\u003c/li\u003e\u003cli\u003eSenior Lecturer\u003c/li\u003e\u003cli\u003eDirector Client Relations\u003c/li\u003e\u003cli\u003eDirector, Center for Stem Cell Biology\u003c/li\u003e\u003cli\u003eAssociate Professor of Radiology and Radiological Sciences\u003c/li\u003e\u003cli\u003eDepartment Chair\u003c/li\u003e\u003cli\u003eProgram Manager\u003c/li\u003e\u003cli\u003eSr. Budget / Accounting Analyst\u003c/li\u003e\u003cli\u003eDirector, CSB Cryo-Electron Microscopy Facility\u003c/li\u003e\u003cli\u003eLibrary Clerk\u003c/li\u003e\u003cli\u003eNurse Pracitioner Family\u003c/li\u003e\u003cli\u003eProfessor of Chemistry\u003c/li\u003e\u003cli\u003eAdminstrative Assistant\u003c/li\u003e\u003cli\u003eAssistant Professor, Department of Pharmacology\u003c/li\u003e\u003cli\u003eImaging Research Scientist\u003c/li\u003e\u003cli\u003eResearch Associate Professor\u003c/li\u003e\u003cli\u003eGraduate student\u003c/li\u003e\u003cli\u003eAdministrative Officer\u003c/li\u003e\u003cli\u003eAssociate Director of the Practice of Business Studies\u003c/li\u003e\u003cli\u003eDirector, Health Professions Advisory Office\u003c/li\u003e\u003cli\u003eMCBR Core Manager\u003c/li\u003e\u003cli\u003eAssistant Professor\u003c/li\u003e\u003cli\u003eOB/GYN housestaff\u003c/li\u003e\u003cli\u003eAdjunct Assistant Professor of Dermatology\u003c/li\u003e\u003cli\u003eCore Manager\u003c/li\u003e\u003cli\u003eAssociate Dean for Research Training \u0026 Career Development\u003c/li\u003e\u003c/ul\u003e"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Codeup", "label": "Codeup", "shape": "dot", "size": 20, "title": "\u003cb\u003eCodeup\u003c/b\u003e \u2013 10\u003cul\u003e\u003cli\u003eTeaching Assistant, Data Science\u003c/li\u003e\u003cli\u003eData Science Instructor\u003c/li\u003e\u003cli\u003eAdmissions Manager\u003c/li\u003e\u003cli\u003eCEO \u0026 Co-Founder\u003c/li\u003e\u003cli\u003eDirector Of Business Development\u003c/li\u003e\u003cli\u003eVice President of Delivery\u003c/li\u003e\u003cli\u003eData Scientist\u003c/li\u003e\u003cli\u003eData Science Instructor and Curriculum Developer\u003c/li\u003e\u003cli\u003eStudent Fellow\u003c/li\u003e\u003cli\u003eSr. Data Scientist, Curriculum Development \u0026 Instruction\u003c/li\u003e\u003c/ul\u003e"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "CGI", "label": "CGI", "shape": "dot", "size": 20, "title": "\u003cb\u003eCGI\u003c/b\u003e \u2013 10\u003cul\u003e\u003cli\u003eData Engineer Consultant\u003c/li\u003e\u003cli\u003eDirector, Consulting Delivery\u003c/li\u003e\u003cli\u003eSenior Talent Acquisition Partner\u003c/li\u003e\u003cli\u003eBusiness Analyst\u003c/li\u003e\u003cli\u003eData Engineer\u003c/li\u003e\u003cli\u003eForescout and Security Engineer\u003c/li\u003e\u003cli\u003eData Scientist, Senior Consultant\u003c/li\u003e\u003cli\u003eTalent Acquisition \u003c/li\u003e\u003c/ul\u003e"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Vanderbilt University School of Medicine", "label": "Vanderbilt University School of Medicine", "shape": "dot", "size": 14, "title": "\u003cb\u003eVanderbilt University School of Medicine\u003c/b\u003e \u2013 7\u003cul\u003e\u003cli\u003eAssistant Professor of Molecular Physiology and Biophysics\u003c/li\u003e\u003cli\u003eInterim Chair of Molecular Physioogy and Biophysics\u003c/li\u003e\u003cli\u003eDirector, Vanderbilt Center for Addiction Research\u003c/li\u003e\u003cli\u003eEdie Carell Johnson Chair and Professor of Pediatric Infectious Diseases\u003c/li\u003e\u003cli\u003eProject Manager\u003c/li\u003e\u003cli\u003eAssociate Dean for Medical Alumni Affairs\u003c/li\u003e\u003cli\u003eAssistant Dean of Biomedical Career Development\u003c/li\u003e\u003c/ul\u003e"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Freelance", "label": "Freelance", "shape": "dot", "size": 12, "title": "\u003cb\u003eFreelance\u003c/b\u003e \u2013 6\u003cul\u003e\u003cli\u003ePhoto Retoucher\u003c/li\u003e\u003cli\u003eData Science and Machine Learning Consultant\u003c/li\u003e\u003cli\u003eArt Critic\u003c/li\u003e\u003cli\u003eAssistant Director\u003c/li\u003e\u003cli\u003eFreelance\u003c/li\u003e\u003cli\u003eFreelance Content Writing\u003c/li\u003e\u003c/ul\u003e"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Self Employed", "label": "Self Employed", "shape": "dot", "size": 10, "title": "\u003cb\u003eSelf Employed\u003c/b\u003e \u2013 5\u003cul\u003e\u003cli\u003eIndependent Entrepreneur\u003c/li\u003e\u003cli\u003eDigital Marketing Specialist\u003c/li\u003e\u003cli\u003eSeeking sales position\u003c/li\u003e\u003cli\u003eHuman Resources Consultant\u003c/li\u003e\u003cli\u003eIndependent Scientific Consultant\u003c/li\u003e\u003c/ul\u003e"}, {"color": "#3449eb", "font": {"color": "white"}, "id": "Self-employed", "label": "Self-employed", "shape": "dot", "size": 10, "title": "\u003cb\u003eSelf-employed\u003c/b\u003e \u2013 5\u003cul\u003e\u003cli\u003eHealth Educator\u003c/li\u003e\u003cli\u003eInvestment Analyst\u003c/li\u003e\u003cli\u003eBusiness Owner\u003c/li\u003e\u003cli\u003eData Scientist\u003c/li\u003e\u003cli\u003ePlatinum Founder Leader \u0026 Global Team Builder\u003c/li\u003e\u003c/ul\u003e"}]);
+        edges = new vis.DataSet([{"color": "grey", "from": "root", "to": "Vanderbilt University Medical Center", "weight": 1}, {"color": "grey", "from": "root", "to": "Vanderbilt University", "weight": 1}, {"color": "grey", "from": "root", "to": "Codeup", "weight": 1}, {"color": "grey", "from": "root", "to": "CGI", "weight": 1}, {"color": "grey", "from": "root", "to": "Vanderbilt University School of Medicine", "weight": 1}, {"color": "grey", "from": "root", "to": "Freelance", "weight": 1}, {"color": "grey", "from": "root", "to": "Self Employed", "weight": 1}, {"color": "grey", "from": "root", "to": "Self-employed", "weight": 1}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": false,
+            "type": "continuous"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "hierarchicalRepulsion": {
+            "centralGravity": 0.0,
+            "damping": 0.09,
+            "nodeDistance": 120,
+            "springConstant": 0.01,
+            "springLength": 100
+        },
+        "solver": "hierarchicalRepulsion",
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+        
+        
+
+        
+
+        network = new vis.Network(container, data, options);
+	 
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>
